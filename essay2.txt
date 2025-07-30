@@ -1,0 +1,2 @@
+Programming in Python is useful for web development.
+                         Python is also widely used in data science projects.
