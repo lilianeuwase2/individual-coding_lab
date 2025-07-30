@@ -106,7 +106,7 @@ class PlagiarismDetector:
             print("Cannot perform calculation; detector is not initialized.")
             return
 
-        print("\n---COMMON WORDS ANALYSIS---")
+        print("\n--- COMMON WORDS ---")
         common_words = self.unique_words1.intersection(self.unique_words2)
 
         if not common_words:
@@ -165,19 +165,19 @@ def main_menu():
     print("   PLAGIARISM DETECTOR   ")
     print("="*30)
 
-    # --- Step 1: Get file paths from the user ---
+    #Get file paths from the user
     print("\nPlease provide the file paths for the essays to be compared.")
     file1 = get_file_path_from_user("Enter path for the first essay (e.g., essay1.txt): ")
     file2 = get_file_path_from_user("Enter path for the second essay (e.g., essay2.txt): ")
 
-    # --- Step 2: Ask about stop word filtering ---
-    use_stops = input("Do you want to filter out common 'stop words' for higher accuracy? (yes/no): ").strip().lower()
+    # Ask about stop word filtering
+    use_stops = input("Do you want to filter out common 'stop words eg;an, is, we, for ' for higher accuracy? (yes/no): ").strip().lower()
     filter_enabled = use_stops in ['yes', 'y']
 
-    # --- Step 3: Initialize the detector ---
+    # Initialize the detector
     detector = PlagiarismDetector(file1, file2, filter_stop_words=filter_enabled)
 
-    # --- Step 4: Run the main menu loop ---
+    #Run the main menu loop
     if detector.initialized:
         while True:
             print("\n--- MENU ---")
@@ -195,34 +195,11 @@ def main_menu():
             elif choice == '3':
                 detector.search_for_word()
             elif choice == '4':
-                print("Exiting program. Goodbye!")
+                print("Exiting program!BYE")
                 break
             else:
-                # Handles invalid menu choices gracefully.
+                # Handles invalid menu choices to avoid errors.
                 print("Invalid choice. Please enter a number between 1 and 4.")
-
-    try:
-        with open("essay1.txt", "w") as f1:
-            f1.write("""Python is a widely-used programming language.
-                         It is popular in web development and data science.""")
-        with open("essay2.txt", "w") as f2:
-            f2.write("""Programming in Python is useful for web development.
-                         Python is also widely used in data science projects.""")
-    except Exception as e:
-        print(f"Could not create demo files: {e}")
-
-    print("\n==============================")
-    print("   PLAGIARISM DETECTOR   ")
-    print("==============================")
-
-    # Create an instance of the detector.
-    detector = PlagiarismDetector("essay1.txt", "essay2.txt")
-
-    # Run the analysis methods only if initialization was successful.
-    if detector.initialized:
-        detector.plagiarism_percentage()
-        detector.find_common_words()
-        detector.search_for_word()
 
 # Run the program
 if __name__ == "__main__":

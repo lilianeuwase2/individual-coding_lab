@@ -1,2 +1,0 @@
-Python is a widely-used programming language.
-                         It is popular in web development and data science.
